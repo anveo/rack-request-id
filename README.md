@@ -1,24 +1,35 @@
 # Rack::RequestId
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'rack-request-id'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install rack-request-id
+Rack middleware which adds a 16-digit hexidecimal `X-Request-Id` header to the response.
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+gem 'rack-request-id'
+```
+
+#### Sinatra
+
+```ruby
+class MyApp < Sinatra::Base
+  use Rack::RequestId
+end
+```
+
+#### Rails
+
+```ruby
+module MyApp
+  class Application < Rails::Application
+    # ...
+    config.middleware.use "Rack::RequestId"
+  end
+end
+```
+
+## Configuration
+
+TODO: proc option to override id format
 
 ## Contributing
 
