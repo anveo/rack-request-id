@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Brian Racer"]
   gem.email         = ["bracer@gmail.com"]
   gem.description   = %q{Request ID Header}
-  gem.summary       = %q{Adds a request id header if none exists.}
-  gem.homepage      = ""
+  gem.summary       = %q{Adds a 16-digit hexidecimal X-Request-Id header if none exists.}
+  gem.homepage      = "https://github.com/anveo/rack-request-id"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
