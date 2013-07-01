@@ -1,6 +1,7 @@
 # Rack::RequestId
 
-Rack middleware which adds a 16-digit hexidecimal `X-Request-Id` header to the response.
+Rack middleware which adds a 16-digit hexidecimal `X-Request-Id` header
+to the response and into `Thread.current[:request_id]`
 
 ## Usage
 
