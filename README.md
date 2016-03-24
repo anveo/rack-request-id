@@ -32,6 +32,16 @@ end
 
 TODO: proc option to override id format
 
+Optionally you can change storage. Storage objects must have `#[]` and `#[]=` method.
+
+```ruby
+require 'request_store'
+
+class MyApp < Sinatra::Base
+  use Rack::RequestId, storage: RequestStore
+end
+```
+
 ## Contributing
 
 1. Fork it
