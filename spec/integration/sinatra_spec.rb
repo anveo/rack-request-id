@@ -7,6 +7,11 @@ module SinatraSpec
     get('/') { status(200) }
   end
 
+  class TestAppWithCustomId < Sinatra::Base
+    use Rack::RequestId, id_generator: proc { "foobar" }
+    get('/') { status(200) }
+  end
+
   class TestAppWithMyStorage < Sinatra::Base
     use Rack::RequestId, storage: MyStorage
     get('/') { status(200) }
@@ -30,6 +35,15 @@ module SinatraSpec
       it 'adds an X-Request-Id header to the response' do
         get '/'
         expect(last_response["X-Request-Id"]).to_not be_nil
+      end
+    end
+
+    context 'with custom id generator' do
+      let(:app) { TestAppWithCustomId.new }
+
+      it 'matches the custom id' do
+        get '/'
+        expect(last_response["X-Request-Id"]).to eq("foobar")
       end
     end
 

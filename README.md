@@ -30,9 +30,15 @@ end
 
 ## Configuration
 
-TODO: proc option to override id format
+Optionally you can override the ID generation `proc`. By default it's `SecureRandom.hex(16)`.
 
-Optionally you can change storage. Storage objects must have `#[]` and `#[]=` method.
+```ruby
+class MyApp < Sinatra::Base
+  use Rack::RequestId, id_generator: proc { SecureRandom.random_number(100) }
+end
+```
+
+Optionally you can also change storage. Storage objects must have `#[]` and `#[]=` method.
 
 ```ruby
 require 'request_store'
@@ -49,3 +55,4 @@ end
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
