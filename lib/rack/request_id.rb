@@ -2,14 +2,16 @@ require 'securerandom'
 
 module Rack
   class RequestId
-    def initialize(app)
+    def initialize(app, opts = {})
       @app = app
+      @storage = opts[:storage] || proc { Thread.current }
     end
 
     def call(env)
-      Thread.current[:request_id] = env['HTTP_X_REQUEST_ID'] || SecureRandom.hex(16)
+      storage = @storage.respond_to?(:call) ? @storage.call : @storage
+      storage[:request_id] = env['HTTP_X_REQUEST_ID'] || SecureRandom.hex(16)
       status, headers, body = @app.call(env)
-      headers['X-Request-Id'] ||= Thread.current[:request_id]
+      headers['X-Request-Id'] ||= storage[:request_id]
       [status, headers, body]
     end
   end
