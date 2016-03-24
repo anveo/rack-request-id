@@ -1,9 +1,14 @@
 # Rack::RequestId
 
-Rack middleware which adds a 16-digit hexidecimal `X-Request-Id` header
-to the response and into `Thread.current[:request_id]`
+Rack middleware which adds a random 16-digit hexidecimal value into an
+`X-Request-Id` response header and also into
+`Thread.current[:request_id]`.  If you are using a multi-threaded
+webserver like [puma](http://puma.io/), see instructions below on how to
+safely store the value globally.
 
 ## Usage
+
+Add the following to your `Gemfile`.
 
 ```ruby
 gem 'rack-request-id'
